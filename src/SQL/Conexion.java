@@ -26,7 +26,7 @@ public class Conexion {
     
     try{
         
-//        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+       Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         String conexionUrl="jdbc:sqlserver://localhost:1433;"
             +"database=javasql;"
             +"user=sa;"

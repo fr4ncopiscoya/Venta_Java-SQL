@@ -1,0 +1,107 @@
+--MOSTRAR CLIENTES--
+
+create procedure mostrarClientes
+AS
+select idcli,dni,nombre,apellido,correo,telefono
+FROM Cliente
+
+GO
+
+exec mostrarClientes
+
+
+
+--INSERTAR CLIENTE--
+
+create procedure insertarCliente
+
+@dni int, @nombre varchar(50),@apellido varchar(50),@telefono int, @correo varchar(50)
+AS
+BEGIN
+insert into Cliente(dni,nombre,apellido,telefono, correo)
+select @dni,@nombre,@apellido,@telefono, @correo
+
+END
+
+
+exec insertarcliente 74848949, 'Raul','Gonzales','raul@gmail.com',98765678  
+
+
+
+--MODIFICAR CLIENTE--
+
+
+create procedure modificarClientes (@idcli int, @dni int, @nombre varchar(50),@apellido varchar(50),@correo varchar(50), @telefono int)
+AS
+UPDATE Cliente
+SET  dni = @dni, nombre = @nombre, apellido = @apellido, correo = @correo, telefono = @telefono
+WHERE idcli = @idcli
+GO
+
+exec modificarClientes 5, 74848949, 'Rodri','Huaman','rodri@gmail.com',98765678
+
+
+--ELIMINAR CLIENTE--
+
+create procedure eliminarCliente
+@idcli int
+ AS 
+ DELETE FROM Cliente WHERE idcli = @idcli
+ GO
+ 
+exec eliminarCliente 5;
+
+
+
+
+
+
+
+
+
+--MOSTRAR PRODUCTOS--
+
+create procedure mostrarProducto
+AS
+select idprod,nom,precio,cantidad,unidad
+FROM Producto
+
+GO
+
+exec mostrarProducto
+
+
+
+
+--INSERTAR PRODUCTOS-
+
+create procedure insertarProducto
+@nom varchar(50),@precio float,@cantidad varchar(50), @unidad varchar(50)
+AS
+BEGIN
+insert into Producto(nom,precio,cantidad, unidad)
+select @nom,@precio,@cantidad, @unidad
+
+END
+
+exec insertarProducto 'Tornillo',2.5, '10', 'decena' 
+
+
+
+--MODIFICAR PRODUCTO--
+
+create procedure modificarProducto (@idprod int,@nom varchar(50),@precio float,@cantidad varchar(50), @unidad varchar(50))
+AS
+UPDATE Producto
+SET  nom = @nom, precio= @precio, cantidad= @cantidad, unidad= @unidad
+WHERE idprod = @idprod
+GO
+
+
+--ELIMINAR PRODUCTO--
+
+create procedure eliminarProducto
+@idprod int
+AS
+DELETE FROM Producto WHERE idprod = @idprod
+GO
